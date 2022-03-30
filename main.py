@@ -1,9 +1,14 @@
-import requests
-from pprint import pprint
-import time
 import datetime
+import time
 from enum import IntEnum
+from pprint import pprint
+
+import requests
 import telegram
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 class Type(IntEnum):
@@ -81,14 +86,17 @@ class Event:
         self.type = Type(TypeTr[data['type']])
         self.id = data['id']
         self.isRead = data['isRead']
-        self.time = datetime.datetime.strptime(data['addedTime'], '%Y-%m-%dT%H:%M:%S.%f+03:00')
 
-        if self.type == Type.LESSON_OPENED:
-            self._parse_opened_lesson()
-        elif self.type == Type.TASK_SOLUTION_REVIEWED:
-            self._parse_solution()
-        elif self.type == Type.TASK_SOLUTION_COMMENTED:
-            self._parse_solution_comment()
+        # self.time = datetime.datetime.strptime(
+        #     data['addedTime'], '%Y-%m-%dT%H:%M:%S.%f+03:00')
+
+        match self.type:
+            case Type.LESSON_OPENED:
+                self._parse_opened_lesson()
+            case Type.TASK_SOLUTION_REVIEWED:
+                self._parse_solution()
+            case Type.TASK_SOLUTION_COMMENTED:
+                self._parse_solution_comment()
 
     def __str__(self):
         if self.type == Type.LESSON_OPENED:
@@ -122,38 +130,55 @@ class YLNotifications:
         self.auth(login, password)
 
     def auth(self, login, password):
-        auth = self.sess.post('https://passport.yandex.ru/passport?mode=auth', data={'login': login, 'passwd': password})
+        auth = self.sess.post('https://passport.yandex.ru/passport?mode=auth',
+                              data={'login': login, 'passwd': password})
         if auth.url != 'https://passport.yandex.ru/profile':
             print(auth.url)
             print(auth.text)
-            raise Exception('Авторизация не удалась. Логин или пароль неправильные. (А может, возникает капча)')
+            raise Exception(
+                'Авторизация не удалась. Логин или пароль неправильные. (А может, возникает капча)')
         print('Авторизация прошла успешно')
 
     def run(self):
         while True:
             for event in self.get_notifications():
                 yield event
-            self.read_notifications()
-            print(datetime.datetime.now())
+
+            # self.read_notifications()
+            # print(datetime.datetime.now())
             time.sleep(15)
 
     def get_notifications(self):  # получить уведомления
-        r = self.sess.get("https://lyceum.yandex.ru/api/notifications", params={'isRead': False})
-        j = r.json()
-        pprint(j)
-        return [Event(j['notificationMap'][e]) for e in j['notificationMap'] if j['notificationMap'][e]['type'] in TypeTr]
+        req = self.sess.get(
+            "https://lyceum.yandex.ru/api/notifications", params={'isRead': False})
+        json_req = req.json()
+
+        # return [Event(j['notificationMap'][e]) for e in j['notificationMap'] if j['notificationMap'][e]['type'] in TypeTr]
+        # print([j['notificationMap'][e] for e in j['notificationMap']
+        #       if j['notificationMap'][e]['type'] in TypeTr][0])
+
+        notification_map = json_req['notificationMap']
+
+        print(notification_map)
+
+        return [notification_map[e] for e in notification_map
+                if notification_map[e]['type'] in TypeTr][0]['objectData']['task']['title']
 
     def read_notifications(self):  # сделать уведомления прочитанными
-        self.sess.patch("https://lyceum.yandex.ru/api/notifications/read", headers={"Content-Type": "application/json", 'X-CSRF-Token': self.sess.cookies['csrftoken']})
+        self.sess.patch('https://lyceum.yandex.ru/api/notifications/read', headers={
+                        'Content-Type': 'application/json', 'X-CSRF-Token': self.sess.cookies['csrftoken']})
 
 
-bot = telegram.Bot('')  # токен Telegram
-n = YLNotifications('nvlastik', 'tutmoyparol')  # логин, пароль от Яндекса
+bot = telegram.Bot(os.environ.get('TELEGRAM_TOKEN'))  # токен Telegram
+n = YLNotifications(os.environ.get('YANDEX_LOGIN'),
+                    os.environ.get('YANDEX_PASSWORD'))
+
 
 while True:
     try:
         for i in n.run():
-            print(i)
-            bot.sendMessage(chat_id=1234567890, text=str(i))  # отсылка сообщения
+            print('отсылка')
+            # отсылка сообщения
+            bot.sendMessage(chat_id=-1001529371199, text=str(i))
     except BaseException as er:
         print(er)

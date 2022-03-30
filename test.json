@@ -1,0 +1,29 @@
+{
+    "id": 35022085,
+    "isRead": false,
+    "type": "task-solution-reviewed",
+    "objectData": {
+        "task": {
+            "id": 24504,
+            "group": 5439,
+            "title": "Задача №1",
+            "course": 651,
+            "lesson": {
+                "id": 3314,
+                "type": "normal",
+                "title": "Создание Django проекта",
+                "isAccepted": true,
+                "shortTitle": "Создание Django"
+            },
+            "scoreMax": 10,
+            "shortTitle": "Задача №1"
+        },
+        "score": 10,
+        "status": {
+            "id": 4,
+            "type": "accepted"
+        },
+        "taskSolutionId": 9076417
+    },
+    "addedTime": "2022-03-08T18: 18: 34.980940+04: 00"
+}
