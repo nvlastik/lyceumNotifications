@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from telegram import ForceReply, Update
 from telegram.ext import (CallbackContext, CommandHandler, Filters,
                           MessageHandler, Updater)
+from helpers import join_notifications
 
 from main import YLNotifications
 
@@ -28,20 +29,24 @@ notifier = YLNotifications(os.environ.get('YANDEX_LOGIN'),
 def start(update: Update, context: CallbackContext):
     """Send a message when the command /start is issued."""
     user = update.effective_user
-    update.message.reply_markdown_v2(fr'Hi {user.mention_markdown_v2()}\!',
+    update.message.reply_markdown_v2(fr'Привет {user.mention_markdown_v2()}\! Я Yandex Lyceum Notifier Bot\. Буду отсылать тебе все уведомления из твоего LMS :\)',
         reply_markup=ForceReply(selective=True),
     )
 
 
 def help_command(update: Update, context: CallbackContext):
     """Send a message when the command /help is issued."""
-    update.message.reply_text('Help!')
+    update.message.reply_text('/last - получить последнее уведомление\n/all - получить все уведомления')
 
 
-def echo(update: Update, context: CallbackContext):
-    """Echo the user message."""
-    update.message.reply_text(notifier.get_notifications())
+def send_last_notification(update: Update, context: CallbackContext):
+    """Send Yandex Lyceum notifications"""
+    update.message.reply_html(notifier.get_last_notification())
 
+
+def send_all_notifications(update: Update, context: CallbackContext):
+    """Send Yandex Lyceum notifications"""
+    update.message.reply_html(join_notifications(notifier.get_all_notifications()))
 
 def main():
     """Start the bot."""
@@ -55,10 +60,13 @@ def main():
     dispatcher.add_handler(CommandHandler("start", start))
     dispatcher.add_handler(CommandHandler("help", help_command))
 
-    # on non command i.e message - echo the message on Telegram
-    dispatcher.add_handler(MessageHandler(
-        Filters.text & ~Filters.command, echo))
 
+    # dispatcher.add_handler(MessageHandler(
+    #     Filters.text & ~Filters.command, send_notifications))
+    
+    dispatcher.add_handler(CommandHandler("last", send_last_notification))
+    dispatcher.add_handler(CommandHandler("all", send_all_notifications))
+    
     # Start the Bot
     updater.start_polling()
 

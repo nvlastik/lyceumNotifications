@@ -1,127 +1,86 @@
-import datetime
-import time
-from enum import IntEnum
-from pprint import pprint
+from _types import NotificationDataType, NotificationTypes, StatusTypes
 
 import requests
-import telegram
-import os
 from dotenv import load_dotenv
 
 load_dotenv()
 
 
-class Type(IntEnum):
-    TASK_SOLUTION_REVIEWED = 1
-    TASK_SOLUTION_COMMENTED = 2
-    LESSON_OPENED = 3
+class BaseNotification:
+    LMS_LINK = '<a href="https://lyceum.yandex.ru">Проверяй LMS!</a>'
 
+    def __init__(self, notification: NotificationDataType):
+        self.id = notification['id']
+        self.is_read = notification['isRead']
+        self.type = notification['type']
+        self.added_time = notification['addedTime']
+        self.data = notification['objectData']
 
-class TypeStatusTask(IntEnum):
-    REVIEW = 2
-    REWORK = 3
-    ACCEPTED = 4
-
-
-class TypeLesson(IntEnum):
-    NORMAL = 0
-
-
-TypeTr = {'task-solution-reviewed': Type.TASK_SOLUTION_REVIEWED,
-          'task-solution-commented': Type.TASK_SOLUTION_COMMENTED,
-          'lesson-opened': Type.LESSON_OPENED}
-
-TypeLessonTr = {'normal': TypeLesson.NORMAL}
-
-
-class Lesson:
-    def __init__(self, data):
-        self.data = data
-        self.id = data['id']
-        self.isAccepted = data['isAccepted']
-        self.shortTitle = data['shortTitle']
-        self.title = data['title']
-        self.type = TypeLesson(TypeLessonTr[data['type']])
-
-
-class Task:
-    def __init__(self, data):
-        self.data = data
-        self.id = data['id']
-        self.course = data['course']
-        self.group = data['group']
-        self.lesson = Lesson(data['lesson'])
-        self.scoreMax = data['scoreMax']
-        self.shortTitle = data['shortTitle']
-        self.title = data['title']
-
-
-class Author:
-    def __init__(self, data):
-        self.data = data
-        self.id = data['id']
-        self.uid = data['uid']
-        self.avatar = data['avatar']
-        self.displayName = data['displayName']
-        self.firstName = data['firstName']
-        self.lastName = data['lastName']
-        self.middleName = data['lastName']
-        self.username = data['username']
-
-
-class LessonOpen:
-    def __init__(self, data):
-        self.data = data
-        self.course = data['course']
-        self.group = data['group']
-        self.lessonId = data['lessonId']
-        self.shortTitle = data['shortTitle']
-        self.title = data['title']
-        self.type = TypeLesson(TypeLessonTr[data['type']])
-
-
-class Event:
-    def __init__(self, data):
-        self.data = data
-        self.type = Type(TypeTr[data['type']])
-        self.id = data['id']
-        self.isRead = data['isRead']
-
-        # self.time = datetime.datetime.strptime(
-        #     data['addedTime'], '%Y-%m-%dT%H:%M:%S.%f+03:00')
-
-        match self.type:
-            case Type.LESSON_OPENED:
-                self._parse_opened_lesson()
-            case Type.TASK_SOLUTION_REVIEWED:
-                self._parse_solution()
-            case Type.TASK_SOLUTION_COMMENTED:
-                self._parse_solution_comment()
+    def format(self, add_lms_link=True):
+        """
+        Форматирует уведомление для отправки сообщения
+        """
+        return f"<b>Тебе пришло новое уведомление!</b>\n\n\
+{BaseNotification.LMS_LINK if add_lms_link else ''}"
 
     def __str__(self):
-        if self.type == Type.LESSON_OPENED:
-            return f'Открыт урок "{self.lesson.title}"'
-        elif self.type == Type.TASK_SOLUTION_REVIEWED:
-            return f'Изменился статус задачи "{self.task.title}": {self.score}/{self.task.scoreMax}'
-        elif self.type == Type.TASK_SOLUTION_COMMENTED:
-            return f'Прокомментировали задачу "{self.task.title}": {self.commentText}'
+        return f"Notification {self.id}: {self.type}"
 
-    def _parse_solution(self):
-        od = self.data['objectData']
-        self.score = od['score']
-        self.solutionId = od['taskSolutionId']
-        self.status = TypeStatusTask(od['status']['id'])
-        self.task = Task(od['task'])
+    def __repr__(self):
+        return f"Notification {self.id}: {self.type}"
 
-    def _parse_solution_comment(self):
-        od = self.data['objectData']
-        self.commentId = od['commentId']
-        self.commentText = od['data']
-        self.solutionId = od['taskSolution']['id']
-        self.task = Task(od['taskSolution']['task'])
 
-    def _parse_opened_lesson(self):
-        self.lesson = LessonOpen(self.data['objectData'])
+class BonusScoreNotification(BaseNotification):
+    def __init__(self, notification: NotificationDataType):
+        super(BonusScoreNotification, self).__init__(notification)
+
+        self.new_score = int(self.data['newScore'])
+        self.old_score = int(self.data['oldScore'])
+        self.changed_by_name = self.data['changedBy']['displayName']
+
+    def format(self):
+        return f"<b>Ты получил бонусный балл!</b>\n\n\
+{self.changed_by_name} поставил(-а) тебе {self.new_score - self.old_score} бонусных баллов!\n\
+<b>Новый рейтинг</b>: {self.new_score} \n\n <a href='https://lyceum.yandex.ru'>Проверяй LMS!</a>"
+
+
+class TaskCommentedNotification(BaseNotification):
+    def __init__(self, notification: NotificationDataType):
+        super(TaskCommentedNotification, self).__init__(notification)
+        self.comment = self.data['data']
+        self.author_display_name = self.data['author']['displayName']
+        self.task = self.data['taskSolution']['task']
+        self.task_title = self.task['title']
+
+    def format(self):
+        return f"<b>{self.author_display_name} прокомментировал задачу `{self.task_title}`</b>\n\n\
+<i>{self.comment}</i>\n\n<a href='https://lyceum.yandex.ru'>Проверяй LMS!</a>"
+
+
+class TaskAcceptedNotification(BaseNotification):
+    def __init__(self, notification: NotificationDataType):
+        super(TaskAcceptedNotification, self).__init__(notification)
+
+        self.task = self.data['task']
+        self.task_title = self.task['title']
+        self.max_score = self.task['scoreMax']
+        self.score = self.data['score']
+
+    def format(self):
+        return f"<b>Зачтена задача `{self.task_title}` !</b>\n\
+<b>Баллы</b>: {self.score}/{self.max_score}\n\n<a href='https://lyceum.yandex.ru'>Проверяй LMS!</a>"
+
+
+class TaskReworkNotification(BaseNotification):
+    def __init__(self, notification: NotificationDataType):
+        super(TaskReworkNotification, self).__init__(notification)
+
+        self.task = self.data['task']
+        self.task_title = self.task['title']
+
+    def format(self):
+        return f"<b>Задача `{self.task_title}` отправлена на доработку</b>\n\
+<a href='https://lyceum.yandex.ru'>Проверяй LMS!</a>"
 
 
 class YLNotifications:
@@ -139,46 +98,46 @@ class YLNotifications:
                 'Авторизация не удалась. Логин или пароль неправильные. (А может, возникает капча)')
         print('Авторизация прошла успешно')
 
-    def run(self):
-        while True:
-            for event in self.get_notifications():
-                yield event
-
-            # self.read_notifications()
-            # print(datetime.datetime.now())
-            time.sleep(15)
-
-    def get_notifications(self):  # получить уведомления
+    def get_all_notifications(self):
         req = self.sess.get(
             "https://lyceum.yandex.ru/api/notifications", params={'isRead': False})
+
         json_req = req.json()
 
-        # return [Event(j['notificationMap'][e]) for e in j['notificationMap'] if j['notificationMap'][e]['type'] in TypeTr]
-        # print([j['notificationMap'][e] for e in j['notificationMap']
-        #       if j['notificationMap'][e]['type'] in TypeTr][0])
+        notifications: dict = json_req['notificationMap']
+        messages = []
 
-        notification_map = json_req['notificationMap']
+        for id, notification in notifications.items():
+            match notification['type']:
+                case NotificationTypes.NOTIFICATION_BONUS_SCORE_CHANGED:
+                    message = BonusScoreNotification(notification).format()
+                case NotificationTypes.NOTIFICATION_TASK_COMMENTED:
+                    message = TaskCommentedNotification(notification).format()
+                case NotificationTypes.NOTIFICATION_TASK_REVIEWED:
 
-        print(notification_map)
+                    match notification['objectData']['status']['type']:
+                        case StatusTypes.STATUS_ACCEPTED:
+                            message = TaskAcceptedNotification(
+                                notification).format()
+                        case StatusTypes.STATUS_REWORK:
+                            message = TaskReworkNotification(
+                                notification).format()
+                        case _:
+                            message = BaseNotification(notification).format()
 
-        return [notification_map[e] for e in notification_map
-                if notification_map[e]['type'] in TypeTr][0]['objectData']['task']['title']
+                case _:
+                    message = BaseNotification(notification).format()
 
-    def read_notifications(self):  # сделать уведомления прочитанными
+            messages.append(message)
+
+        return messages
+
+    def get_last_notification(self):
+        return self.get_all_notifications()[-1]
+
+    def read_notifications(self):
+        """
+        Прочитать уведомления
+        """
         self.sess.patch('https://lyceum.yandex.ru/api/notifications/read', headers={
                         'Content-Type': 'application/json', 'X-CSRF-Token': self.sess.cookies['csrftoken']})
-
-
-bot = telegram.Bot(os.environ.get('TELEGRAM_TOKEN'))  # токен Telegram
-n = YLNotifications(os.environ.get('YANDEX_LOGIN'),
-                    os.environ.get('YANDEX_PASSWORD'))
-
-
-while True:
-    try:
-        for i in n.run():
-            print('отсылка')
-            # отсылка сообщения
-            bot.sendMessage(chat_id=-1001529371199, text=str(i))
-    except BaseException as er:
-        print(er)
