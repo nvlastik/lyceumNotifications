@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from telegram import ForceReply, Update
 from telegram.ext import (CallbackContext, CommandHandler, Filters,
                           MessageHandler, Updater)
-from helpers import join_notifications
+from _helpers import join_notifications
 
 from main import YLNotifications
 
