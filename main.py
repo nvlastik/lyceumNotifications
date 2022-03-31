@@ -2,7 +2,7 @@ import requests
 from dotenv import load_dotenv
 
 from _types import NotificationTypes, StatusTypes
-from notifications import (BaseNotification, BonusScoreNotification,
+from notifications import (BaseNotification, BonusScoreNotification, LessonOpenedNotification,
                            TaskAcceptedNotification, TaskCommentedNotification,
                            TaskReworkNotification)
 
@@ -31,12 +31,14 @@ class YLNotifications:
         json_req = req.json()
 
         notifications: dict = json_req['notificationMap']
-        messages = []
+        messages = {}
 
         for id, notification in notifications.items():
             match notification['type']:
                 case NotificationTypes.NOTIFICATION_BONUS_SCORE_CHANGED:
                     message = BonusScoreNotification(notification).format()
+                case NotificationTypes.NOTIFICATION_LESSON_OPENED:
+                    message = LessonOpenedNotification(notification).format()
                 case NotificationTypes.NOTIFICATION_TASK_COMMENTED:
                     message = TaskCommentedNotification(notification).format()
                 case NotificationTypes.NOTIFICATION_TASK_REVIEWED:
@@ -54,12 +56,12 @@ class YLNotifications:
                 case _:
                     message = BaseNotification(notification).format()
 
-            messages.append(message)
+            messages[id] = message
 
         return messages
 
     def get_last_notification(self):
-        return self.get_all_notifications()[-1]
+        return list(self.get_all_notifications().values())[-1]
 
     def read_notifications(self):
         """

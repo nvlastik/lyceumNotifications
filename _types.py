@@ -5,6 +5,7 @@ class NotificationTypes:
     NOTIFICATION_TASK_REVIEWED = 'task-solution-reviewed'
     NOTIFICATION_TASK_COMMENTED = 'task-solution-commented'
     NOTIFICATION_BONUS_SCORE_CHANGED = 'bonus-score-changed'
+    NOTIFICATION_LESSON_OPENED = 'lesson-opened'
 
 
 class StatusTypes:

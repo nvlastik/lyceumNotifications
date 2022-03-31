@@ -39,6 +39,15 @@ class BonusScoreNotification(BaseNotification):
 <b>Новый рейтинг</b>: {self.new_score} \n\n <a href='https://lyceum.yandex.ru'>Проверяй LMS!</a>"
 
 
+class LessonOpenedNotification(BaseNotification):
+    def __init__(self, notification: NotificationDataType):
+        super(LessonOpenedNotification, self).__init__(notification)
+        self.title = self.data['title']
+
+    def format(self):
+        return f"<b>Открылся новый урок `{self.title}`</b>\n\n{BaseNotification.LMS_LINK}"
+
+
 class TaskCommentedNotification(BaseNotification):
     def __init__(self, notification: NotificationDataType):
         super(TaskCommentedNotification, self).__init__(notification)
