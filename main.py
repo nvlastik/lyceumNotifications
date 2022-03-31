@@ -19,10 +19,10 @@ class YLNotifications:
                               data={'login': login, 'passwd': password})
         if auth.url != 'https://passport.yandex.ru/profile':
             print(auth.url)
-            print(auth.text)
             raise Exception(
                 'Авторизация не удалась. Логин или пароль неправильные. (А может, возникает капча)')
         print('Авторизация прошла успешно')
+        
 
     def get_all_notifications(self):
         req = self.sess.get(

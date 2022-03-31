@@ -2,22 +2,19 @@ import logging
 import os
 
 from dotenv import load_dotenv
-from telegram import ForceReply, Update
-from telegram.ext import (CallbackContext, CommandHandler, Filters,
-                          MessageHandler, Updater)
-from _helpers import join_notifications, get_notification_by_id, get_user_by_id, add_notifications_to_user
+from telegram import Update
+from telegram.ext import CallbackContext, CommandHandler, Updater
 
-from main import YLNotifications
-
+from _helpers import (add_notifications_to_user, add_user, get_user_by_id,
+                      join_notifications)
 from db import db_session
-from models.notification import Notification
-from models.user import User
+from main import YLNotifications
 
 load_dotenv()
 
 db_session.global_init("db/database.db")
 
-INTERVAL = 10
+CHECK_INTERVAL = 60  # in seconds
 
 # Enable logging
 logging.basicConfig(
@@ -26,14 +23,10 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-notifier = YLNotifications(os.environ.get('YANDEX_LOGIN'),
-                           os.environ.get('YANDEX_PASSWORD'))
-
-users_notifications = {}
-
 
 def check_notifications(context: CallbackContext):
     job = context.job
+    notifier = job.context[2]
     notifications = notifier.get_all_notifications()
     user_id = job.context[1]
 
@@ -49,11 +42,12 @@ def check_notifications(context: CallbackContext):
                 context.bot.send_message(
                     user_id, text=notification, parse_mode='HTML')
                 notifications_to_add.add(notification_id)
+
         add_notifications_to_user(notifications_to_add, user_id, db_session)
 
     except AttributeError:
-        context.bot.send_message(
-            user_id, text="<b>Вы не зарегистрированы!</b>", parse_mode='HTML')
+        context.bot.send_message(user_id,
+                                 text="<b>Вы не зарегистрированы!</b>", parse_mode='HTML')
 
 
 def remove_job_if_exists(name: str, context: CallbackContext):
@@ -73,7 +67,8 @@ def enable_notifications_checker(update: Update, context: CallbackContext):
     try:
         job_removed = remove_job_if_exists(str(chat_id), context)
         context.job_queue.run_repeating(
-            check_notifications, INTERVAL, context=(chat_id, update.message.from_user['id']), name=str(chat_id))
+            check_notifications, CHECK_INTERVAL, context=(chat_id, update.message.from_user['id'],
+                                                          context.user_data['notifier']), name=str(chat_id))
 
         text = 'Отслеживание уведомлений включено!'
         if job_removed:
@@ -107,22 +102,45 @@ def help_command(update: Update, context: CallbackContext):
 
 def send_last_notification(update: Update, context: CallbackContext):
     """Send Yandex Lyceum notifications"""
+    notifier = context.user_data['notifier']
     update.message.reply_html(notifier.get_last_notification())
 
 
 def send_all_notifications(update: Update, context: CallbackContext):
     """Send Yandex Lyceum notifications"""
+    notifier = context.user_data['notifier']
     update.message.reply_html(join_notifications(
         notifier.get_all_notifications()))
 
+
 def begin_register(update: Update, context: CallbackContext):
-    update.message.reply_html("<b>Через пробел введите команду <code>/enter</code> , почту, а затем пароль от LMS (кликните, чтобы скопировать шаблон):\n\n</b><code>/enter [почта] [пароль]</code>")
+    update.message.reply_html(
+        "<b>Через пробел введите команду <code>/enter</code> , почту, а затем пароль от LMS (кликните, чтобы скопировать шаблон):\n\n</b><code>/enter [почта] [пароль]</code>")
 
 
 def finish_register(update: Update, context: CallbackContext):
-    email, password = context.args[0], context.args[1] 
-    #todo проверить корректность, добавить пользователя в бд
-    
+    email, password = context.args[0], context.args[1]
+    try:
+
+        notifier = YLNotifications(email, password)
+        context.user_data['notifier'] = notifier
+
+        if not add_user({'email': email, 'password': password, 'id': update.message.chat_id}, db_session):
+            update.message.reply_text(
+                'Вы уже зарегистрированы! Введите /help чтобы узнать подробнее обо всех командах')
+        else:
+            update.message.reply_text(
+                'Регистрация прошла успешно! Введите /help чтобы узнать подробнее обо всех командах')
+
+        context.bot.delete_message(chat_id=update.message.chat_id,
+                                   message_id=update.message.message_id)
+
+    except Exception as e:
+        print(e)
+        update.message.reply_text(
+            'Введены некорректные данные! Пожалуйста введите команду /enter повторно.')
+
+
 def main():
     """Start the bot."""
     # Create the Updater and pass it your bot's token.
@@ -142,7 +160,7 @@ def main():
         "enable", enable_notifications_checker))
     dispatcher.add_handler(CommandHandler(
         "disable", disable_notifications_checker))
-    
+
     dispatcher.add_handler(CommandHandler("register", begin_register))
     dispatcher.add_handler(CommandHandler("enter", finish_register))
 
