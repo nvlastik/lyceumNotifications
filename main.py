@@ -22,7 +22,6 @@ class YLNotifications:
             raise Exception(
                 'Авторизация не удалась. Логин или пароль неправильные. (А может, возникает капча)')
         print('Авторизация прошла успешно')
-        
 
     def get_all_notifications(self):
         req = self.sess.get(
@@ -34,27 +33,23 @@ class YLNotifications:
         messages = {}
 
         for id, notification in notifications.items():
-            match notification['type']:
-                case NotificationTypes.NOTIFICATION_BONUS_SCORE_CHANGED:
-                    message = BonusScoreNotification(notification).format()
-                case NotificationTypes.NOTIFICATION_LESSON_OPENED:
-                    message = LessonOpenedNotification(notification).format()
-                case NotificationTypes.NOTIFICATION_TASK_COMMENTED:
-                    message = TaskCommentedNotification(notification).format()
-                case NotificationTypes.NOTIFICATION_TASK_REVIEWED:
-
-                    match notification['objectData']['status']['type']:
-                        case StatusTypes.STATUS_ACCEPTED:
-                            message = TaskAcceptedNotification(
-                                notification).format()
-                        case StatusTypes.STATUS_REWORK:
-                            message = TaskReworkNotification(
-                                notification).format()
-                        case _:
-                            message = BaseNotification(notification).format()
-
-                case _:
+            n_type = notification['type']
+            if n_type == NotificationTypes.NOTIFICATION_BONUS_SCORE_CHANGED:
+                message = BonusScoreNotification(notification).format()
+            elif n_type == NotificationTypes.NOTIFICATION_LESSON_OPENED:
+                message = LessonOpenedNotification(notification).format()
+            elif n_type == NotificationTypes.NOTIFICATION_TASK_COMMENTED:
+                message = TaskCommentedNotification(notification).format()
+            elif n_type == NotificationTypes.NOTIFICATION_TASK_REVIEWED:
+                status_type = notification['objectData']['status']['type']
+                if status_type == StatusTypes.STATUS_ACCEPTED:
+                    message = TaskAcceptedNotification(notification).format()
+                elif status_type == StatusTypes.STATUS_REWORK:
+                    message = TaskReworkNotification(notification).format()
+                else:
                     message = BaseNotification(notification).format()
+            else:
+                message = BaseNotification(notification).format()
 
             messages[id] = message
 
