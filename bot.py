@@ -74,7 +74,9 @@ def enable_notifications_checker(update: Update, context: CallbackContext):
         if job_removed:
             text = 'Уведомления уже отслеживаются!'
         update.message.reply_text(text)
-
+    except KeyError:
+        update.message.reply_html(
+            'Сначала нужно зарегистрироваться!\n\n<code>/enter [почта] [пароль]</code>')
     except (IndexError, ValueError):
         update.message.reply_text('Использование: /enable')
 
@@ -102,15 +104,23 @@ def help_command(update: Update, context: CallbackContext):
 
 def send_last_notification(update: Update, context: CallbackContext):
     """Send Yandex Lyceum notifications"""
-    notifier = context.user_data['notifier']
-    update.message.reply_html(notifier.get_last_notification())
+    try:
+        notifier = context.user_data['notifier']
+        update.message.reply_html(notifier.get_last_notification())
+    except KeyError:
+        update.message.reply_html(
+            'Сначала нужно зарегистрироваться!\n\n<code>/enter [почта] [пароль]</code>')
 
 
 def send_all_notifications(update: Update, context: CallbackContext):
     """Send Yandex Lyceum notifications"""
-    notifier = context.user_data['notifier']
-    update.message.reply_html(join_notifications(
-        notifier.get_all_notifications()))
+    try:
+        notifier = context.user_data['notifier']
+        update.message.reply_html(join_notifications(
+            notifier.get_all_notifications()))
+    except KeyError:
+        update.message.reply_html(
+            'Сначала нужно зарегистрироваться!\n\n<code>/enter [почта] [пароль]</code>')
 
 
 def begin_register(update: Update, context: CallbackContext):
@@ -121,24 +131,25 @@ def begin_register(update: Update, context: CallbackContext):
 def finish_register(update: Update, context: CallbackContext):
     email, password = context.args[0], context.args[1]
     try:
-
         notifier = YLNotifications(email, password)
         context.user_data['notifier'] = notifier
-
         if not add_user({'email': email, 'password': password, 'id': update.message.chat_id}, db_session):
             update.message.reply_text(
                 'Вы уже зарегистрированы! Введите /help чтобы узнать подробнее обо всех командах')
         else:
             update.message.reply_text(
                 'Регистрация прошла успешно! Введите /help чтобы узнать подробнее обо всех командах')
-
-        context.bot.delete_message(chat_id=update.message.chat_id,
-                                   message_id=update.message.message_id)
-
+    except KeyError:
+        update.message.reply_html(
+            'Сначала нужно зарегистрироваться!\n\n<code>/enter [почта] [пароль]</code>')
     except Exception as e:
         print(e)
         update.message.reply_text(
             'Введены некорректные данные! Пожалуйста введите команду /enter повторно.')
+
+    # Удаление сообщения с данными пользователя
+    context.bot.delete_message(chat_id=update.message.chat_id,
+                               message_id=update.message.message_id)
 
 
 def main():
