@@ -1,0 +1,987 @@
+{
+    "34995024": {
+        "id": 34995024,
+        "isRead": false,
+        "type": "bonus-score-changed",
+        "objectData": {
+            "newScore": 5,
+            "oldScore": 0,
+            "changedBy": {
+                "id": 39250,
+                "uid": 45007132,
+                "avatar": "58107/enc-7ec624346211e186900868e3525b09c0c7918ad2cbc080a34bb3e69e07c13057",
+                "gender": "unspecified",
+                "username": "proninc",
+                "lastName": "Пронин",
+                "firstName": "Андрей",
+                "middleName": "",
+                "displayName": "Пронин Андрей"
+            }
+        },
+        "addedTime": "2022-03-06T18: 55: 36.458046+04: 00"
+    },
+    "35022085": {
+        "id": 35022085,
+        "isRead": false,
+        "type": "task-solution-reviewed",
+        "objectData": {
+            "task": {
+                "id": 24504,
+                "group": 5439,
+                "title": "Задача №1",
+                "course": 651,
+                "lesson": {
+                    "id": 3314,
+                    "type": "normal",
+                    "title": "Создание Django проекта",
+                    "isAccepted": true,
+                    "shortTitle": "Создание Django"
+                },
+                "scoreMax": 10,
+                "shortTitle": "Задача №1"
+            },
+            "score": 10,
+            "status": {
+                "id": 4,
+                "type": "accepted"
+            },
+            "taskSolutionId": 9076417
+        },
+        "addedTime": "2022-03-08T18: 18: 34.980940+04: 00"
+    },
+    "35023669": {
+        "id": 35023669,
+        "isRead": false,
+        "type": "task-solution-reviewed",
+        "objectData": {
+            "task": {
+                "id": 24569,
+                "group": 5439,
+                "title": "Дополнительная задача №1",
+                "course": 651,
+                "lesson": {
+                    "id": 3314,
+                    "type": "normal",
+                    "title": "Создание Django проекта",
+                    "isAccepted": true,
+                    "shortTitle": "Создание Django"
+                },
+                "scoreMax": 20,
+                "shortTitle": "ДОП №1"
+            },
+            "score": 20,
+            "status": {
+                "id": 4,
+                "type": "accepted"
+            },
+            "taskSolutionId": 9076422
+        },
+        "addedTime": "2022-03-08T19: 46: 02.713815+04: 00"
+    },
+    "35112237": {
+        "id": 35112237,
+        "isRead": false,
+        "type": "lesson-opened",
+        "objectData": {
+            "type": "normal",
+            "group": 5439,
+            "title": "HTTP протокол. Настройка urls, views",
+            "course": 651,
+            "lessonId": 3315,
+            "shortTitle": "HTTP протокол"
+        },
+        "addedTime": "2022-03-13T17: 25: 34.832033+04: 00"
+    },
+    "35165169": {
+        "id": 35165169,
+        "isRead": false,
+        "type": "task-solution-commented",
+        "objectData": {
+            "data": "Хорошая работа! Есть несколько замечаний, находятся в коммитах: https: //github.com/Yakser/YandexLyceumPlusPlus-Django/commit/eada0470060b323ea4a8f958e94e34564a290f53. Просьба, в будущем не мержить ветку с заданием до окончания проверки.",
+            "author": {
+                "id": 166920,
+                "uid": 537190526,
+                "avatar": "50595/enc-c2fc98d98cf6555cd1ab89db1b43733c3a3f350ea137588d1c48e3814f01c147",
+                "username": "maledeus",
+                "lastName": "Востриков",
+                "firstName": "Андрей",
+                "middleName": "",
+                "displayName": "Востриков Андрей"
+            },
+            "commentId": 66841667,
+            "taskSolution": {
+                "id": 9128975,
+                "task": {
+                    "id": 24512,
+                    "group": 5439,
+                    "title": "Задача №2",
+                    "course": 651,
+                    "lesson": {
+                        "id": 3315,
+                        "type": "normal",
+                        "title": "HTTP протокол. Настройка urls, views",
+                        "isAccepted": false,
+                        "shortTitle": "HTTP протокол"
+                    },
+                    "scoreMax": 10,
+                    "shortTitle": "Задача №2"
+                },
+                "score": 0,
+                "status": {
+                    "id": 2,
+                    "type": "review"
+                }
+            }
+        },
+        "addedTime": "2022-03-15T20:22:45.781864+04:00"
+    },
+    "35167459": {
+        "id": 35167459,
+        "isRead": false,
+        "type": "task-solution-commented",
+        "objectData": {
+            "data": "Это разные вещи. name 
+у урла - это название конкретного пути для обратных вызовов, а namespace - это пространство имен для урлов приложения, используется, чтобы пути в одинаково названных приложениях могли корректно использоваться", "author": {"id": 166920, "uid": 537190526, "avatar": "50595/enc-c2fc98d98cf6555cd1ab89db1b43733c3a3f350ea137588d1c48e3814f01c147", "username": "maledeus", "lastName": "Востриков", "firstName": "Андрей", "middleName": "", "displayName": "Востриков Андрей"
+        },
+        "commentId": 66848336,
+        "taskSolution": {
+            "id": 9128975,
+            "task": {
+                "id": 24512,
+                "group": 5439,
+                "title": "Задача №2",
+                "course": 651,
+                "lesson": {
+                    "id": 3315,
+                    "type": "normal",
+                    "title": "HTTP протокол. Настройка urls, views",
+                    "isAccepted": false,
+                    "shortTitle": "HTTP протокол"
+                },
+                "scoreMax": 10,
+                "shortTitle": "Задача №2"
+            },
+            "score": 0,
+            "status": {
+                "id": 2,
+                "type": "review"
+            }
+        }
+    },
+    "addedTime": "2022-03-15T21: 59: 24.895227+04: 00"
+},
+"35167609": {
+    "id": 35167609,
+    "isRead": false,
+    "type": "task-solution-commented",
+    "objectData": {
+        "data": "отличная работа! можно мержить",
+        "author": {
+            "id": 166920,
+            "uid": 537190526,
+            "avatar": "50595/enc-c2fc98d98cf6555cd1ab89db1b43733c3a3f350ea137588d1c48e3814f01c147",
+            "username": "maledeus",
+            "lastName": "Востриков",
+            "firstName": "Андрей",
+            "middleName": "",
+            "displayName": "Востриков Андрей"
+        },
+        "commentId": 66848829,
+        "taskSolution": {
+            "id": 9128975,
+            "task": {
+                "id": 24512,
+                "group": 5439,
+                "title": "Задача №2",
+                "course": 651,
+                "lesson": {
+                    "id": 3315,
+                    "type": "normal",
+                    "title": "HTTP протокол. Настройка urls, views",
+                    "isAccepted": false,
+                    "shortTitle": "HTTP протокол"
+                },
+                "scoreMax": 10,
+                "shortTitle": "Задача №2"
+            },
+            "score": 0,
+            "status": {
+                "id": 2,
+                "type": "review"
+            }
+        }
+    },
+    "addedTime": "2022-03-15T22: 06: 40.527779+04: 00"
+},
+"35167615": {
+    "id": 35167615,
+    "isRead": false,
+    "type": "task-solution-reviewed",
+    "objectData": {
+        "task": {
+            "id": 24512,
+            "group": 5439,
+            "title": "Задача №2",
+            "course": 651,
+            "lesson": {
+                "id": 3315,
+                "type": "normal",
+                "title": "HTTP протокол. Настройка urls, views",
+                "isAccepted": true,
+                "shortTitle": "HTTP протокол"
+            },
+            "scoreMax": 10,
+            "shortTitle": "Задача №2"
+        },
+        "score": 10,
+        "status": {
+            "id": 4,
+            "type": "accepted"
+        },
+        "taskSolutionId": 9128975
+    },
+    "addedTime": "2022-03-15T22: 06: 43.594208+04: 00"
+},
+"35185407": {
+    "id": 35185407,
+    "isRead": false,
+    "type": "task-solution-commented",
+    "objectData": {
+        "data": "нет, пустая не должна. в пустой строке в регулярном выражении надо не забывать про знак закрытия строки",
+        "author": {
+            "id": 166920,
+            "uid": 537190526,
+            "avatar": "50595/enc-c2fc98d98cf6555cd1ab89db1b43733c3a3f350ea137588d1c48e3814f01c147",
+            "username": "maledeus",
+            "lastName": "Востриков",
+            "firstName": "Андрей",
+            "middleName": "",
+            "displayName": "Востриков Андрей"
+        },
+        "commentId": 66899632,
+        "taskSolution": {
+            "id": 9138899,
+            "task": {
+                "id": 24571,
+                "group": 5439,
+                "title": "Дополнительная задача №2",
+                "course": 651,
+                "lesson": {
+                    "id": 3315,
+                    "type": "normal",
+                    "title": "HTTP протокол. Настройка urls, views",
+                    "isAccepted": false,
+                    "shortTitle": "HTTP протокол"
+                },
+                "scoreMax": 20,
+                "shortTitle": "ДОП №2"
+            },
+            "score": 0,
+            "status": {
+                "id": 2,
+                "type": "review"
+            }
+        }
+    },
+    "addedTime": "2022-03-16T21: 36: 24.945216+04: 00"
+},
+"35185438": {
+    "id": 35185438,
+    "isRead": false,
+    "type": "task-solution-commented",
+    "objectData": {
+        "data": "Пробегитесь еще раз по всем урлам, везде должны стоять знаки закрытия строки - $",
+        "author": {
+            "id": 166920,
+            "uid": 537190526,
+            "avatar": "50595/enc-c2fc98d98cf6555cd1ab89db1b43733c3a3f350ea137588d1c48e3814f01c147",
+            "username": "maledeus",
+            "lastName": "Востриков",
+            "firstName": "Андрей",
+            "middleName": "",
+            "displayName": "Востриков Андрей"
+        },
+        "commentId": 66899708,
+        "taskSolution": {
+            "id": 9138899,
+            "task": {
+                "id": 24571,
+                "group": 5439,
+                "title": "Дополнительная задача №2",
+                "course": 651,
+                "lesson": {
+                    "id": 3315,
+                    "type": "normal",
+                    "title": "HTTP протокол. Настройка urls, views",
+                    "isAccepted": false,
+                    "shortTitle": "HTTP протокол"
+                },
+                "scoreMax": 20,
+                "shortTitle": "ДОП №2"
+            },
+            "score": 0,
+            "status": {
+                "id": 2,
+                "type": "review"
+            }
+        }
+    },
+    "addedTime": "2022-03-16T21: 37: 27.841186+04: 00"
+},
+"35185616": {
+    "id": 35185616,
+    "isRead": false,
+    "type": "task-solution-commented",
+    "objectData": {
+        "data": "уточню у коллег и вернусь с ответом. Не силен в джанго 1.11, вообще не знаю, зачем вас заставляют на ней писать, её никто не использует нигде :)",
+        "author": {
+            "id": 166920,
+            "uid": 537190526,
+            "avatar": "50595/enc-c2fc98d98cf6555cd1ab89db1b43733c3a3f350ea137588d1c48e3814f01c147",
+            "username": "maledeus",
+            "lastName": "Востриков",
+            "firstName": "Андрей",
+            "middleName": "",
+            "displayName": "Востриков Андрей"
+        },
+        "commentId": 66900195,
+        "taskSolution": {
+            "id": 9138899,
+            "task": {
+                "id": 24571,
+                "group": 5439,
+                "title": "Дополнительная задача №2",
+                "course": 651,
+                "lesson": {
+                    "id": 3315,
+                    "type": "normal",
+                    "title": "HTTP протокол. Настройка urls, views",
+                    "isAccepted": false,
+                    "shortTitle": "HTTP протокол"
+                },
+                "scoreMax": 20,
+                "shortTitle": "ДОП №2"
+            },
+            "score": 0,
+            "status": {
+                "id": 2,
+                "type": "review"
+            }
+        }
+    },
+    "addedTime": "2022-03-16T21: 44: 48.751124+04: 00"
+},
+"35185921": {
+    "id": 35185921,
+    "isRead": false,
+    "type": "task-solution-commented",
+    "objectData": {
+        "data": "в общем, потестировал урлы, получается, если путь только перенаправляет на другую группу урлов (через include или указание на приложение), то закрывающий знак не нужен. А если урл вызывает представление - то нужен",
+        "author": {
+            "id": 166920,
+            "uid": 537190526,
+            "avatar": "50595/enc-c2fc98d98cf6555cd1ab89db1b43733c3a3f350ea137588d1c48e3814f01c147",
+            "username": "maledeus",
+            "lastName": "Востриков",
+            "firstName": "Андрей",
+            "middleName": "",
+            "displayName": "Востриков Андрей"
+        },
+        "commentId": 66901124,
+        "taskSolution": {
+            "id": 9138899,
+            "task": {
+                "id": 24571,
+                "group": 5439,
+                "title": "Дополнительная задача №2",
+                "course": 651,
+                "lesson": {
+                    "id": 3315,
+                    "type": "normal",
+                    "title": "HTTP протокол. Настройка urls, views",
+                    "isAccepted": false,
+                    "shortTitle": "HTTP протокол"
+                },
+                "scoreMax": 20,
+                "shortTitle": "ДОП №2"
+            },
+            "score": 0,
+            "status": {
+                "id": 2,
+                "type": "review"
+            }
+        }
+    },
+    "addedTime": "2022-03-16T22: 04: 43.404986+04: 00"
+},
+"35185979": {
+    "id": 35185979,
+    "isRead": false,
+    "type": "task-solution-commented",
+    "objectData": {
+        "data": "просмотрел еще раз проект, нужно только из корневых урлов убрать $ в переадресации на homepage. Всё остальное правильно",
+        "author": {
+            "id": 166920,
+            "uid": 537190526,
+            "avatar": "50595/enc-c2fc98d98cf6555cd1ab89db1b43733c3a3f350ea137588d1c48e3814f01c147",
+            "username": "maledeus",
+            "lastName": "Востриков",
+            "firstName": "Андрей",
+            "middleName": "",
+            "displayName": "Востриков Андрей"
+        },
+        "commentId": 66901283,
+        "taskSolution": {
+            "id": 9138899,
+            "task": {
+                "id": 24571,
+                "group": 5439,
+                "title": "Дополнительная з��дача №2",
+                "course": 651,
+                "lesson": {
+                    "id": 3315,
+                    "type": "normal",
+                    "title": "HTTP протокол. Настройка urls, views",
+                    "isAccepted": false,
+                    "shortTitle": "HTTP протокол"
+                },
+                "scoreMax": 20,
+                "shortTitle": "ДОП №2"
+            },
+            "score": 0,
+            "status": {
+                "id": 2,
+                "type": "review"
+            }
+        }
+    },
+    "addedTime": "2022-03-16T22: 08: 12.762769+04: 00"
+},
+"35186599": {
+    "id": 35186599,
+    "isRead": false,
+    "type": "task-solution-reviewed",
+    "objectData": {
+        "task": {
+            "id": 24571,
+            "group": 5439,
+            "title": "Дополнительная задача №2",
+            "course": 651,
+            "lesson": {
+                "id": 3315,
+                "type": "normal",
+                "title": "HTTP протокол. Настройка urls, views",
+                "isAccepted": true,
+                "shortTitle": "HTTP протокол"
+            },
+            "scoreMax": 20,
+            "shortTitle": "ДОП №2"
+        },
+        "score": 20,
+        "status": {
+            "id": 4,
+            "type": "accepted"
+        },
+        "taskSolutionId": 9138899
+    },
+    "addedTime": "2022-03-16T22: 48: 09.665460+04: 00"
+},
+"35261483": {
+    "id": 35261483,
+    "isRead": false,
+    "type": "lesson-opened",
+    "objectData": {
+        "type": "normal",
+        "group": 5439,
+        "title": "ORM Django. Описание базы данных. Система управления контентом",
+        "course": 651,
+        "lessonId": 3316,
+        "shortTitle": "ORM Django"
+    },
+    "addedTime": "2022-03-20T15: 54: 11.616885+04: 00"
+},
+"35290860": {
+    "id": 35290860,
+    "isRead": false,
+    "type": "task-solution-commented",
+    "objectData": {
+        "data": "нет, БД не нужно",
+        "author": {
+            "id": 166920,
+            "uid": 537190526,
+            "avatar": "50595/enc-c2fc98d98cf6555cd1ab89db1b43733c3a3f350ea137588d1c48e3814f01c147",
+            "username": "maledeus",
+            "lastName": "Востриков",
+            "firstName": "Андрей",
+            "middleName": "",
+            "displayName": "Востриков Андрей"
+        },
+        "commentId": 67192494,
+        "taskSolution": {
+            "id": 9197646,
+            "task": {
+                "id": 24572,
+                "group": 5439,
+                "title": "Задача №3",
+                "course": 651,
+                "lesson": {
+                    "id": 3316,
+                    "type": "normal",
+                    "title": "ORM Django. Описание базы данных. Система управления контентом",
+                    "isAccepted": false,
+                    "shortTitle": "ORM Django"
+                },
+                "scoreMax": 10,
+                "shortTitle": "Задача №3"
+            },
+            "score": 0,
+            "status": {
+                "id": 2,
+                "type": "review"
+            }
+        }
+    },
+    "addedTime": "2022-03-21T20: 20: 40.740434+04: 00"
+},
+"35290945": {
+    "id": 35290945,
+    "isRead": false,
+    "type": "task-solution-commented",
+    "objectData": {
+        "data": "Сделайте пожалуйста незакрытый ПР (пулл реквест) ветки в мастер",
+        "author": {
+            "id": 166920,
+            "uid": 537190526,
+            "avatar": "50595/enc-c2fc98d98cf6555cd1ab89db1b43733c3a3f350ea137588d1c48e3814f01c147",
+            "username": "maledeus",
+            "lastName": "Востриков",
+            "firstName": "Андрей",
+            "middleName": "",
+            "displayName": "Востриков Андрей"
+        },
+        "commentId": 67192742,
+        "taskSolution": {
+            "id": 9197646,
+            "task": {
+                "id": 24572,
+                "group": 5439,
+                "title": "Задача №3",
+                "course": 651,
+                "lesson": {
+                    "id": 3316,
+                    "type": "normal",
+                    "title": "ORM Django. Описание базы данных. Система управления контентом",
+                    "isAccepted": false,
+                    "shortTitle": "ORM Django"
+                },
+                "scoreMax": 10,
+                "shortTitle": "Задача №3"
+            },
+            "score": 0,
+            "status": {
+                "id": 2,
+                "type": "review"
+            }
+        }
+    },
+    "addedTime": "2022-03-21T20: 23: 12.629872+04: 00"
+},
+"35291438": {
+    "id": 35291438,
+    "isRead": false,
+    "type": "task-solution-reviewed",
+    "objectData": {
+        "task": {
+            "id": 24572,
+            "group": 5439,
+            "title": "Задача №3",
+            "course": 651,
+            "lesson": {
+                "id": 3316,
+                "type": "normal",
+                "title": "ORM Django. Описание базы данных. Система управления контентом",
+                "isAccepted": false,
+                "shortTitle": "ORM Django"
+            },
+            "scoreMax": 10,
+            "shortTitle": "Задача №3"
+        },
+        "score": 0,
+        "status": {
+            "id": 3,
+            "type": "rework"
+        },
+        "taskSolutionId": 9197646
+    },
+    "addedTime": "2022-03-21T20: 39: 37.980018+04: 00"
+},
+"35294829": {
+    "id": 35294829,
+    "isRead": false,
+    "type": "task-solution-commented",
+    "objectData": {
+        "data": "Отличная работа! Комментарии в ПР",
+        "author": {
+            "id": 166920,
+            "uid": 537190526,
+            "avatar": "50595/enc-c2fc98d98cf6555cd1ab89db1b43733c3a3f350ea137588d1c48e3814f01c147",
+            "username": "maledeus",
+            "lastName": "Востриков",
+            "firstName": "Андрей",
+            "middleName": "",
+            "displayName": "Востриков Андрей"
+        },
+        "commentId": 67204438,
+        "taskSolution": {
+            "id": 9197646,
+            "task": {
+                "id": 24572,
+                "group": 5439,
+                "title": "Задача №3",
+                "course": 651,
+                "lesson": {
+                    "id": 3316,
+                    "type": "normal",
+                    "title": "ORM Django. Описание базы данных. Система управления контентом",
+                    "isAccepted": false,
+                    "shortTitle": "ORM Django"
+                },
+                "scoreMax": 10,
+                "shortTitle": "Задача №3"
+            },
+            "score": 0,
+            "status": {
+                "id": 2,
+                "type": "review"
+            }
+        }
+    },
+    "addedTime": "2022-03-21T22: 59: 56.389187+04: 00"
+},
+"35294836": {
+    "id": 35294836,
+    "isRead": false,
+    "type": "task-solution-reviewed",
+    "objectData": {
+        "task": {
+            "id": 24572,
+            "group": 5439,
+            "title": "Задача №3",
+            "course": 651,
+            "lesson": {
+                "id": 3316,
+                "type": "normal",
+                "title": "ORM Django. Описание базы данных. Система управления контентом",
+                "isAccepted": false,
+                "shortTitle": "ORM Django"
+            },
+            "scoreMax": 10,
+            "shortTitle": "Задача №3"
+        },
+        "score": 0,
+        "status": {
+            "id": 3,
+            "type": "rework"
+        },
+        "taskSolutionId": 9197646
+    },
+    "addedTime": "2022-03-21T22: 59: 58.499832+04: 00"
+},
+"35295850": {
+    "id": 35295850,
+    "isRead": false,
+    "type": "task-solution-commented",
+    "objectData": {
+        "data": "Пара небольших доработок",
+        "author": {
+            "id": 166920,
+            "uid": 537190526,
+            "avatar": "50595/enc-c2fc98d98cf6555cd1ab89db1b43733c3a3f350ea137588d1c48e3814f01c147",
+            "username": "maledeus",
+            "lastName": "Востриков",
+            "firstName": "Андрей",
+            "middleName": "",
+            "displayName": "Востриков Андрей"
+        },
+        "commentId": 67207716,
+        "taskSolution": {
+            "id": 9197646,
+            "task": {
+                "id": 24572,
+                "group": 5439,
+                "title": "Задача №3",
+                "course": 651,
+                "lesson": {
+                    "id": 3316,
+                    "type": "normal",
+                    "title": "ORM Django. Описание базы данных. Система управления контентом",
+                    "isAccepted": false,
+                    "shortTitle": "ORM Django"
+                },
+                "scoreMax": 10,
+                "shortTitle": "Задача №3"
+            },
+            "score": 0,
+            "status": {
+                "id": 2,
+                "type": "review"
+            }
+        }
+    },
+    "addedTime": "2022-03-22T00: 21: 29.697647+04: 00"
+},
+"35300072": {
+    "id": 35300072,
+    "isRead": false,
+    "type": "task-solution-commented",
+    "objectData": {
+        "data": "По поводу поля weight - у этого поля не обозначен verbose_name, джанго будет использовать название по умолчанию, т.е. weight. А в большинстве, остальные поля все переведены на русский",
+        "author": {
+            "id": 166920,
+            "uid": 537190526,
+            "avatar": "50595/enc-c2fc98d98cf6555cd1ab89db1b43733c3a3f350ea137588d1c48e3814f01c147",
+            "username": "maledeus",
+            "lastName": "Востриков",
+            "firstName": "Андрей",
+            "middleName": "",
+            "displayName": "Востриков Андрей"
+        },
+        "commentId": 67219171,
+        "taskSolution": {
+            "id": 9197646,
+            "task": {
+                "id": 24572,
+                "group": 5439,
+                "title": "Задача №3",
+                "course": 651,
+                "lesson": {
+                    "id": 3316,
+                    "type": "normal",
+                    "title": "ORM Django. Описание базы данных. Система управления контентом",
+                    "isAccepted": false,
+                    "shortTitle": "ORM Django"
+                },
+                "scoreMax": 10,
+                "shortTitle": "Задача №3"
+            },
+            "score": 0,
+            "status": {
+                "id": 2,
+                "type": "review"
+            }
+        }
+    },
+    "addedTime": "2022-03-22T12: 27: 18.916187+04: 00"
+},
+"35301721": {
+    "id": 35301721,
+    "isRead": false,
+    "type": "task-solution-commented",
+    "objectData": {
+        "data": "Принято",
+        "author": {
+            "id": 166920,
+            "uid": 537190526,
+            "avatar": "50595/enc-c2fc98d98cf6555cd1ab89db1b43733c3a3f350ea137588d1c48e3814f01c147",
+            "username": "maledeus",
+            "lastName": "Востриков",
+            "firstName": "Андрей",
+            "middleName": "",
+            "displayName": "Востриков Андрей"
+        },
+        "commentId": 67223877,
+        "taskSolution": {
+            "id": 9197646,
+            "task": {
+                "id": 24572,
+                "group": 5439,
+                "title": "Задача №3",
+                "course": 651,
+                "lesson": {
+                    "id": 3316,
+                    "type": "normal",
+                    "title": "ORM Django. Описание базы данных. Система управления контентом",
+                    "isAccepted": false,
+                    "shortTitle": "ORM Django"
+                },
+                "scoreMax": 10,
+                "shortTitle": "Задача №3"
+            },
+            "score": 0,
+            "status": {
+                "id": 2,
+                "type": "review"
+            }
+        }
+    },
+    "addedTime": "2022-03-22T13: 42: 54.281321+04: 00"
+},
+"35301730": {
+    "id": 35301730,
+    "isRead": false,
+    "type": "task-solution-reviewed",
+    "objectData": {
+        "task": {
+            "id": 24572,
+            "group": 5439,
+            "title": "Задача №3",
+            "course": 651,
+            "lesson": {
+                "id": 3316,
+                "type": "normal",
+                "title": "ORM Django. Описание базы данных. Система управления контентом",
+                "isAccepted": true,
+                "shortTitle": "ORM Django"
+            },
+            "scoreMax": 10,
+            "shortTitle": "Задача №3"
+        },
+        "score": 10,
+        "status": {
+            "id": 4,
+            "type": "accepted"
+        },
+        "taskSolutionId": 9197646
+    },
+    "addedTime": "2022-03-22T13: 42: 57.136367+04: 00"
+},
+"35432457": {
+    "id": 35432457,
+    "isRead": false,
+    "type": "lesson-opened",
+    "objectData": {
+        "type": "normal",
+        "group": 5439,
+        "title": "HTML и язык шаблонов Джанго",
+        "course": 651,
+        "lessonId": 3318,
+        "shortTitle": "HTML и язык шаб"
+    },
+    "addedTime": "2022-03-28T12: 38: 03.625917+04: 00"
+},
+"35432893": {
+    "id": 35432893,
+    "isRead": false,
+    "type": "lesson-opened",
+    "objectData": {
+        "type": "normal",
+        "group": 5439,
+        "title": "HTML и язык шаблонов Джанго",
+        "course": 651,
+        "lessonId": 3318,
+        "shortTitle": "HTML и язык шаб"
+    },
+    "addedTime": "2022-03-28T12: 56: 05.707815+04: 00"
+},
+"35450068": {
+    "id": 35450068,
+    "isRead": false,
+    "type": "task-solution-commented",
+    "objectData": {
+        "data": "Задание очень простое, вопросов нет",
+        "author": {
+            "id": 166920,
+            "uid": 537190526,
+            "avatar": "50595/enc-c2fc98d98cf6555cd1ab89db1b43733c3a3f350ea137588d1c48e3814f01c147",
+            "username": "maledeus",
+            "lastName": "Востриков",
+            "firstName": "Андрей",
+            "middleName": "",
+            "displayName": "Востриков Андрей"
+        },
+        "commentId": 67636237,
+        "taskSolution": {
+            "id": 9278079,
+            "task": {
+                "id": 24536,
+                "group": 5439,
+                "title": "Задача №4",
+                "course": 651,
+                "lesson": {
+                    "id": 3318,
+                    "type": "normal",
+                    "title": "HTML и язык шаблонов Джанго",
+                    "isAccepted": false,
+                    "shortTitle": "HTML и язык шаб"
+                },
+                "scoreMax": 10,
+                "shortTitle": "Задача №4"
+            },
+            "score": 0,
+            "status": {
+                "id": 2,
+                "type": "review"
+            }
+        }
+    },
+    "addedTime": "2022-03-28T20: 52: 37.659925+04: 00"
+},
+"35450076": {
+    "id": 35450076,
+    "isRead": false,
+    "type": "task-solution-reviewed",
+    "objectData": {
+        "task": {
+            "id": 24536,
+            "group": 5439,
+            "title": "Задача №4",
+            "course": 651,
+            "lesson": {
+                "id": 3318,
+                "type": "normal",
+                "title": "HTML и язык шаблонов Джанго",
+                "isAccepted": true,
+                "shortTitle": "HTML и язык шаб"
+            },
+            "scoreMax": 10,
+            "shortTitle": "Задача №4"
+        },
+        "score": 10,
+        "status": {
+            "id": 4,
+            "type": "accepted"
+        },
+        "taskSolutionId": 9278079
+    },
+    "addedTime": "2022-03-28T20: 52: 40.470243+04: 00"
+}
+}
+
+
+
+
+
+
+
+
+
+
+{
+"id": 35022085,
+"isRead": false,
+"type": "task-solution-reviewed",
+"objectData": {
+    "task": {
+        "id": 24504,
+        "group": 5439,
+        "title": "Задача №1",
+        "course": 651,
+        "lesson": {
+            "id": 3314,
+            "type": "normal",
+            "title": "Создание Django проекта",
+            "isAccepted": true,
+            "shortTitle": "Создание Django"
+        },
+        "scoreMax": 10,
+        "shortTitle": "Задача №1"
+    },
+    "score": 10,
+    "status": {
+        "id": 4,
+        "type": "accepted"
+    },
+    "taskSolutionId": 9076417
+},
+"addedTime": "2022-03-08T18: 18: 34.980940+04: 00"
+}
